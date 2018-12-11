@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.c                                           :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 13:42:49 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/06 20:43:31 by nivergne         ###   ########.fr       */
+/*   Created: 2018/12/11 15:14:18 by nivergne          #+#    #+#             */
+/*   Updated: 2018/12/11 21:26:23 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fillit.h"
+#include "../include/fillit.h"
 
 void		usage(void)
 {
@@ -24,7 +24,7 @@ int			main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		usage();	
+		usage();
 		return (0);
 	}
 	else if ((fd = open(av[1], O_RDONLY)) == -1)
