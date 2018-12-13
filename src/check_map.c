@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 13:42:49 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/14 00:03:51 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/14 00:15:23 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int			check_grid(int fd, int **tab)
 		else if (check_contact(buff) == -1)
 			buff_free = -1;
 		else
-			create_tetris(tetris, buff);	
+			create_tetris(tetris, buff, tab);	
 		tetris++;
 	}
 	ft_strdel(&buff);

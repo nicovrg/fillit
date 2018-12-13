@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 23:55:19 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/14 00:03:51 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/14 00:59:16 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,30 @@ int			**create_tab(int **tab)
 	return (tab);
 }
 
-int		**create_tetris(int tetris, char *buff)
+int		**create_tetris(int tetris, char *buff, int **tab)
 {
-	int 	i;
+	int i;
+    int j;
+    int k;
 
 	i = 0;
-	while (buff[i] != '#')
+	j = 0;
+	k = 2;
+    while (buff[i] != '#')
 		i++;
-
+    tab[tetris][0] = 0;
+    tab[tetris][1] = 0;
+	while (buff[i])
+    {
+        if (buff[i] == '#')
+        {
+            tab[tetris][k] = ;  
+            k++;
+        }
+        i++;
+        j++;
+    }
 	return ;
 }
+
+//compter le nb (x) de . avant le \n? si egal + 0, si moins -x si + +x 
