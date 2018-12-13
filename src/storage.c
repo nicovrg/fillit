@@ -1,26 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fillit.h                                           :+:      :+:    :+:   */
+/*   storage.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/11/24 13:44:30 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/13 23:59:42 by nivergne         ###   ########.fr       */
+/*   Created: 2018/12/13 23:55:19 by nivergne          #+#    #+#             */
+/*   Updated: 2018/12/13 23:55:55 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int			**create_tab(int **tab)
+{
+	int		i;
 
-#ifndef FILLIT_H
-# define FILLIT_H
+	i = 0;
+	if (!(tab = (int **)malloc(sizeof(int *) * 26)))
+		return (-1);
+	while (i < 26)
+	{
+		if (!(tab[i] = (int *)malloc(sizeof(int) * 8)))
+			return (-1);
+		i++;
+	}
+	return (tab);
+}
 
-# include "../libft/libft.h"
+int		**create_tetris(int tetris, char *buff)
+{
+	int 	i;
 
-int     check_contact(char *buff);
-int     check_buff(char *buff);
-int     check_grid(int fd, int **tab);
+	i = 0;
+	while (buff[i] != '#')
+		i++;
 
-int     **create_tab(int **tab);
-int     **create_tetris(int tetris, char *buff);
-
-#endif
+	return ;
+}

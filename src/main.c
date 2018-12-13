@@ -6,11 +6,23 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:14:18 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/11 21:26:23 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/13 23:59:48 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fillit.h"
+
+void		fillit(int fd)
+{
+	int 	tetris;
+	int		**tab;
+	
+	if (!(tab = create_tab(tab)))
+		return (-1);
+	if (!(tetris = (check_grid(fd, tab) >= 0)))
+		return (-1);
+		
+}
 
 void		usage(void)
 {
@@ -32,6 +44,12 @@ int			main(int ac, char **av)
 		ft_putstr("couldn't open file\n");
 		return (0);
 	}
+	else
+		fillit(fd);
+	return (0);
+}
+
+	/*
 	else if (check_grid(fd) == 1)
 	{
 		printf("This file is valid\n");
@@ -43,17 +61,23 @@ int			main(int ac, char **av)
 		printf("This file is not valid\n");
 		return (0);
 	}
-	return (0);
-}
+	*/
 
 
 
 /*
 
-Lire le fichier
-Checker la grille
+Lire le fichier Done
+Checker la grille Done
+Stocker les tetriminos 
 Resoudre la grille
 Afficher le resultat
+
+Checker les free
+Checker les noms des erreurs
+Checker le nb de pieces
+Checker si fichier non envoye ou fichier vide
+
 
 Votre exécutable doit prendre en paramètre un (et un seul) fichier décrivant la liste
 des Tetriminos à agencer. Ce fichier est formaté de façon très précise : chaque description
