@@ -6,24 +6,39 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 23:55:19 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/14 01:32:45 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/14 19:38:27 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+# include "../libft/libft.h"
+
 int			**create_tab(int **tab)
 {
-	int		i;
+	int	i;
 
 	i = 0;
 	if (!(tab = (int **)malloc(sizeof(int *) * 26)))
-		return (-1);
+		return (NULL);
 	while (i < 26)
 	{
 		if (!(tab[i] = (int *)malloc(sizeof(int) * 8)))
-			return (-1);
+			return (NULL);
 		i++;
 	}
 	return (tab);
+}
+
+void		free_tab(int ***tab)
+{
+	int	i;
+	
+	i = 0;
+	while (i < 26)
+	{
+		free(&(*tab[i]));
+		i++;	
+	}
+	free(&(*tab));	
 }
 
 int     relative_coord(int i, int j, char *buff)
@@ -37,7 +52,83 @@ int     relative_coord(int i, int j, char *buff)
     pos = 0;
     i_cpy = i;
     j_cpy = j;
-    while (buff[i] && j < i) //tant que pas de newline et pos ancien index < pos nouvel index
+    while (buff[i] && j < i)
+    {
+        if (buff[i] == '\n')
+            nl++;
+        i++;
+    }
+    return (nl);
+}
+
+void    create_tetris(int tetris, char *buff, int ***tab)
+{
+	int i;
+    int x;
+    int y;
+	int k;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	k = 0;
+    while (buff[i] && buff[i] != '#')
+		i++;
+	x = i % 4;
+	y = i / 4;
+	while (buff[i])
+    {
+		if (buff[i] == '#')
+		{
+			*tab[tetris][k] = ((i % 4) - x);
+			printf("tab[tetris][%d] = %d\n", k, *tab[tetris][k]);
+			k++;
+			*tab[tetris][k] = ((i / 4) - y);
+			printf("tab[tetris][%d] = %d\n", k, *tab[tetris][k]);
+			k++;
+			x = i % 4;
+			y = i / 4;
+		}
+        i++;
+    }
+}
+
+void	print_tetris(int __unused **tab)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < 26)
+	{
+		//j = 0;
+		while (j < 8)
+		{
+			//printf("i = %d\tj = %d\ttab[i][j] = %d\n", i , j, tab[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+
+//creer un print tetris
+//compter le nb (x) de . avant le \n? si egal + 0, si moins -x si + +x 
+
+/*
+int     relative_coord(int i, int j, char *buff)
+{
+    int nl;
+    int pos;
+    int i_cpy;
+    int j_cpy;
+
+    nl = 0;
+    pos = 0;
+    i_cpy = i;
+    j_cpy = j;
+    while (buff[i] && j < i)
     {
         if (buff[i] == '\n')
             nl++;
@@ -57,16 +148,30 @@ void    create_tetris(int tetris, char *buff, int ***tab)
 	k = 2;
     while (buff[i] != '#')
 		i++;
+	i++;
     *tab[tetris][0] = 0;
     *tab[tetris][1] = 0;
-    j = i;
+    printf("tab[tetris][0] = %d\n", *tab[tetris][0]);
+    printf("tab[tetris][1] = %d\n", *tab[tetris][1]);
+	j = i;
 	while (buff[i])
     {
         if (buff[i] == '#')
         {
-            *tab[tetris][k] = 5 - i - j;
+			if (relative_coord(i, j, buff) == 0)
+			{
+				printf("no nl\n");
+				*tab[tetris][k] = 1 + i - j;
+			}
+			else
+			{
+				printf("nl\n");
+            	*tab[tetris][k] = 5 - i - j;
+			}
+		    printf("tab[tetris][%d] = %d\n", k, *tab[tetris][k]);
             k++;
             *tab[tetris][k] = relative_coord(i, j, buff);
+		    printf("tab[tetris][%d] = %d\n", k, *tab[tetris][k]);
             j = i;  
             k++;
         }
@@ -74,8 +179,6 @@ void    create_tetris(int tetris, char *buff, int ***tab)
     }
 }
 
-//creer un print tetris
-//compter le nb (x) de . avant le \n? si egal + 0, si moins -x si + +x 
 
 char	**ft_map(int size, char **map)
 {
@@ -175,4 +278,4 @@ char	**ft_solve(char **map, int **tab, int size, int num, int nbr_tetris)
 	}
 	return (NULL);
 }
-
+*/

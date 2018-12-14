@@ -6,21 +6,24 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:14:18 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/14 01:32:51 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/14 15:13:16 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fillit.h"
 
-void		fillit(int fd)
+int		fillit(int fd)
 {
 	int		**tab;
 	int 	tetris;
 	
+	tab = NULL;
 	if (!(tab = create_tab(tab)))
 		return (-1);
 	if (!(tetris = (check_grid(fd, tab) >= 0)))
 		return (-1);
+	print_tetris(tab);
+	return (0);
 }
 
 void		usage(void)
