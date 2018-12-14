@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 13:44:30 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/14 00:15:10 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/14 01:25:26 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int     check_buff(char *buff);
 int     check_grid(int fd, int **tab);
 
 int     **create_tab(int **tab);
-int     **create_tetris(int tetris, char *buff, int **tab);
+int     relative_coord(int i, int j, char *buff);
+void    create_tetris(int tetris, char *buff, int ***tab);
 
 #endif
