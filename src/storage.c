@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 23:55:19 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/14 01:24:48 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/14 01:32:45 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,7 @@ void    create_tetris(int tetris, char *buff, int ***tab)
     }
 }
 
+//creer un print tetris
 //compter le nb (x) de . avant le \n? si egal + 0, si moins -x si + +x 
 
 char	**ft_map(int size, char **map)
