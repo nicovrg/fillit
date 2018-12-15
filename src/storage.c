@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 23:55:19 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/14 19:38:27 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/15 23:05:32 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,61 @@ void		free_tab(int ***tab)
 	free(&(*tab));	
 }
 
+void    create_tetris(int tetris, char *buff, int ***tab)
+{
+	int i;
+	int x;
+	int y;
+	int k;
+
+	i = 0;
+	x = 0;
+	y = 0;
+	k = 2;
+	while (buff[i] && buff[i] != '#')
+		i++;
+	x = i % 5;
+	y = i / 5;
+	*tab[tetris][0] = 0; 
+	*tab[tetris][1] = 0; 
+	while (buff[i])
+	{
+		if (buff[i] == '#')
+		{
+			*tab[tetris][k] = ((i % 5) - x); 
+			*tab[tetris][k + 1] = ((i / 5) - y);
+			printf("tab[tetris][%d] = %d\ntab[tetris][%d] = %d\n", k - 2, *tab[tetris][k], k - 1, *tab[tetris][k + 1]); 
+			k = k + 2;
+		}
+		i++;
+	}
+}
+
+void	print_tetris(int __unused **tab)
+{
+	int i;
+	int j;
+
+	i = 0;
+	j = 0;
+	while (i < 26)
+	{
+		//j = 0;
+		while (j < 8)
+		{
+			//printf("i = %d\tj = %d\ttab[i][j] = %d\n", i , j, tab[i][j]);
+			j++;
+		}
+		i++;
+	}
+}
+
+
+//creer un print tetris
+//compter le nb (x) de . avant le \n? si egal + 0, si moins -x si + +x 
+
+/*
+
 int     relative_coord(int i, int j, char *buff)
 {
     int nl;
@@ -68,10 +123,10 @@ void    create_tetris(int tetris, char *buff, int ***tab)
     int y;
 	int k;
 
-	i = 0;
 	x = 0;
-	y = 0;
+	i = 0;
 	k = 0;
+	y = 0;
     while (buff[i] && buff[i] != '#')
 		i++;
 	x = i % 4;
@@ -93,30 +148,6 @@ void    create_tetris(int tetris, char *buff, int ***tab)
     }
 }
 
-void	print_tetris(int __unused **tab)
-{
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
-	while (i < 26)
-	{
-		//j = 0;
-		while (j < 8)
-		{
-			//printf("i = %d\tj = %d\ttab[i][j] = %d\n", i , j, tab[i][j]);
-			j++;
-		}
-		i++;
-	}
-}
-
-
-//creer un print tetris
-//compter le nb (x) de . avant le \n? si egal + 0, si moins -x si + +x 
-
-/*
 int     relative_coord(int i, int j, char *buff)
 {
     int nl;
