@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:14:18 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/15 23:26:49 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/17 20:06:32 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,18 @@
 
 int		fillit(int fd)
 {
-	int		**tab;
 	int 	tetris;
+	int		**tab;
 	
 	tab = NULL;
 	if (!(tab = create_tab(tab)))
 		return (-1);
 	if (!(tetris = (check_grid(fd, tab) >= 0)))
+	{
+		free_tab(tab);
 		return (-1);
+	}
+
 	printf("valid\n");
 	return (0);
 }
@@ -51,6 +55,174 @@ int			main(int ac, char **av)
 	return (0);
 }
 
+
+/*
+
+
+#include "libft/libft.h"
+
+char	**ft_map(int size, char **map)
+{
+	int x;
+	int y;
+
+	y = 0;
+//	if (map != NULL)
+//		ft_free_doubletab(map, size);
+	if (!(map = (char **)malloc(sizeof(char *) * size)))
+		return (NULL);
+	while (y < size)
+	{
+		x = 0;
+		if (!(map[y] = (char *)malloc(sizeof(char) * size)))
+		{
+//			ft_free_doubletab(map, y);
+			return (NULL);
+		}
+		while (x < size)
+		{
+			map[y][x] = '.';
+			x++;
+		}
+		y++;
+	}
+	return (map);
+}
+
+char	**ft_place_piece(char **map, int **tab, int x, int y)
+{
+	int j;
+	int k;
+//	static int letter;
+	int i;
+
+	j = 0;
+	k = 1;
+//	if (!letter)
+//		letter = 0;
+	while (k <= 7)
+	{
+		map[y + *(*tab + k)][x + *(*tab + j)] = 'A'; //+ letter;
+		i = 0;
+		while (i < 4)
+		{
+			printf("%s\n", map[i]);
+			i++;
+		}
+		printf("\n");
+		k = k + 2;
+		j = j + 2;
+	}
+	//letter++;
+	return (map);
+}
+
+char	**ft_delete_piece(char **map, int **tab, int x, int y)
+{
+	int j;
+	int k;
+
+	j = 0;
+	k = 1;
+	while (k <= 7)
+	{
+		map[y + *(*tab + k)][x + *(*tab + j)] = '.';
+		k = k + 2;
+		j = j + 2;
+	}
+	return (map);
+}
+
+/*int		ft_solve(char **map, int **tab, int size)
+{
+	int			x;
+	int			y;
+	int			j;
+	int			k;
+
+	if (*(*tab) == 1000)
+		return (1);
+	y = 0;
+	while (y < size)//iter colone
+	{
+		x = 0;
+		while (x < size)//iter ligne
+		{
+			k = 1;
+			j = 0;
+			while (k <= 7 && x + *(*tab + j) < size && y + *(*tab + k) < size &&
+			y + *(*tab + k) >= 0 && x + *(*tab + j) >= 0 &&
+			map[y + *(*tab + k)][x + *(*tab + j)] == '.')
+			{
+				if (k == 7)//dispinibilité verifier
+				{
+					map = ft_place_piece(map, tab, x, y);
+					ft_solve(map, tab + 1, size);//on a reussit a placer la piece donc on essaye avec la suivante
+					map = ft_delete_piece(map, tab, x, y);// on suprime et on recommence sur la case d'apres
+				}
+				k = k + 2;
+				j = j + 2;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+int		ft_check_free(char **map, int **tab, int x, int y)
+{
+	int k;
+	int j;
+	int i;
+	int size;
+
+
+	size = 0;
+	j = 0;
+	k = 1;
+	while (map[0][size])
+		size++;
+	size++;
+	while (k <= 7 && x + *(*tab + j) < size && y + *(*tab + k) < size &&
+	y + *(*tab + k) >= 0 && x + *(*tab + j) >= 0 &&
+	map[y + *(*tab + k)][x + *(*tab + j)] == '.')
+	{
+		if (k == 7)//dispinibilité verifier
+			return(1);
+		k = k + 2;
+		j = j + 2;
+	}
+	return(0);
+}
+
+int		ft_solve(char **map, int **tab, int size)
+{
+	int			x;
+	int			y;
+
+	if (*(*tab) == 1000)
+		return (1);
+	y = 0;
+	while (y < size)//iter colone
+	{
+		x = 0;
+		while (x < size)//iter ligne
+		{
+			if (ft_check_free(map, tab, x, y) == 1)
+			{
+				map = ft_place_piece(map, tab, x, y);
+				ft_solve(map, tab + 1, size);//on a reussit a placer la piece donc on essaye avec la suivante
+				map = ft_delete_piece(map, tab, x, y);// on suprime et on recommence sur la case d'apres
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+*/
+
 /*
 
 Lire le fichier Done
@@ -59,7 +231,7 @@ Stocker les tetriminos
 Resoudre la grille
 Afficher le resultat
 
-Checker les free
+Checker les free (tab[tetris] non free)
 Checker les noms des erreurs
 Checker le nb de pieces (<26?)
 Checker si fichier non envoye ou fichier vide
@@ -74,7 +246,7 @@ Si vous ignorez ce qu’est un usage, lancez la commande cp sans argument dans v
 Il n’y aura jamais plus de 26 Tetriminos dans un fichier de description.
 
 
-//printf("tab[tetris][%d] = %d\ntab[tetris][%d] = %d\n", k - 2, *tab[tetris][k], k - 1, *tab[tetris][k + 1]); 
+//printf("tab[tetris][%d] = %d\ntab[tetris][%d] = %d\n", k - 2, (*tab)[tetris][k], k - 1, (*tab)[tetris][k + 1]);
 
 void	print_tetris(int __unused **tab)
 {
@@ -146,69 +318,6 @@ void    create_tetris(int tetris, char *buff, int ***tab)
         i++;
     }
 }
-
-int     relative_coord(int i, int j, char *buff)
-{
-    int nl;
-    int pos;
-    int i_cpy;
-    int j_cpy;
-
-    nl = 0;
-    pos = 0;
-    i_cpy = i;
-    j_cpy = j;
-    while (buff[i] && j < i)
-    {
-        if (buff[i] == '\n')
-            nl++;
-        i++;
-    }
-    return (nl);
-}
-
-void    create_tetris(int tetris, char *buff, int ***tab)
-{
-	int i;
-    int j;
-    int k;
-
-	i = 0;
-	j = 0;
-	k = 2;
-    while (buff[i] != '#')
-		i++;
-	i++;
-    *tab[tetris][0] = 0;
-    *tab[tetris][1] = 0;
-    printf("tab[tetris][0] = %d\n", *tab[tetris][0]);
-    printf("tab[tetris][1] = %d\n", *tab[tetris][1]);
-	j = i;
-	while (buff[i])
-    {
-        if (buff[i] == '#')
-        {
-			if (relative_coord(i, j, buff) == 0)
-			{
-				printf("no nl\n");
-				*tab[tetris][k] = 1 + i - j;
-			}
-			else
-			{
-				printf("nl\n");
-            	*tab[tetris][k] = 5 - i - j;
-			}
-		    printf("tab[tetris][%d] = %d\n", k, *tab[tetris][k]);
-            k++;
-            *tab[tetris][k] = relative_coord(i, j, buff);
-		    printf("tab[tetris][%d] = %d\n", k, *tab[tetris][k]);
-            j = i;  
-            k++;
-        }
-        i++;
-    }
-}
-
 
 char	**ft_map(int size, char **map)
 {

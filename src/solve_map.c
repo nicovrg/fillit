@@ -6,45 +6,80 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:55:30 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/15 23:56:35 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/17 20:06:35 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 # include "../libft/libft.h"
 
-char	**ft_map(int size, char **map)
+int		free_map(char **map)
 {
-	int x;
-	int y;
-
-	y = 0;
-	if (map != NULL)
-		ft_free_doubletab(map, size);
-	if (!(map = (char **)malloc(sizeof(char *) * size)))
-		return (NULL);
-	while (y < size)
+	int	i;
+	
+	i = 0;
+	while (map[i])
 	{
-		x = 0;
-		if (!(map[y] = (char *)malloc(sizeof(char) * size)))
+		free(map[i]);
+		i++;	
+	}
+	free(map);		
+}
+
+char	**create_map(int size)
+{
+	int 	x;
+	int 	y;
+	char	**map;
+
+	x = 0;
+	if (!(map = (char **)malloc(sizeof(char *) * size)))
+		return (-1);
+	while (x < size)
+	{
+		y = 0;
+		if (!(map[x] = (char *)malloc(sizeof(char) * size)))
 		{
-			ft_free_doubletab(map, y);
-			return (NULL);
+			free_map(map);
+			return (-1);
 		}
-		while (x < size)
+		while (map[y] < size)
 		{
-			map[y][x] = '.';
-			x++;
+			map[x][y] == '.';
+			y++;
 		}
-		y++;
+		x++;
 	}
 	return (map);
 }
 
-char	**ft_place_piece(char **map, int **tab, int num, int x, int y)
+void	asign_to_map(char ***map)
 {
+	
+
+}
+
+void	delete_from_map(char ***map)
+{
+
+}
+
+int		solve_map(int **tab)
+{
+	int size;
+
+	size = 1;
+	create_map(size);
+
+
+
+}
+
+
+char	**ft_place_piece(char **map, int **tab, int num, int x, int y) //tab[x][y]
+{
+	int i;
 	int j;
 	int k;
-	int i;
 
 	j = 0;
 	k = 1;
@@ -109,4 +144,32 @@ char	**ft_solve(char **map, int **tab, int size, int num, int nbr_tetris)
 		y++;
 	}
 	return (NULL);
+}
+
+char	**ft_map(int size, char **map)
+{
+	int x;
+	int y;
+
+	y = 0;
+	if (map != NULL)
+		ft_free_doubletab(map, size);
+	if (!(map = (char **)malloc(sizeof(char *) * size)))
+		return (NULL);
+	while (y < size)
+	{
+		x = 0;
+		if (!(map[y] = (char *)malloc(sizeof(char) * size)))
+		{
+			ft_free_doubletab(map, y);
+			return (NULL);
+		}
+		while (x < size)
+		{
+			map[y][x] = '.';
+			x++;
+		}
+		y++;
+	}
+	return (map);
 }

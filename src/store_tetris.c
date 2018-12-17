@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   storage.c                                          :+:      :+:    :+:   */
+/*   store_tetris.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 23:55:19 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/15 23:26:53 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/17 20:06:37 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ void		free_tab(int ***tab)
 	i = 0;
 	while (i < 26)
 	{
-		free(&(*tab[i]));
+		free(tab[i]);
 		i++;	
 	}
-	free(&(*tab));	
+	free(tab);	
 }
 
 void    	create_tetris(int tetris, char *buff, int ***tab)
@@ -56,14 +56,15 @@ void    	create_tetris(int tetris, char *buff, int ***tab)
 		i++;
 	x = i % 5;
 	y = i / 5;
-	*tab[tetris][0] = 0; 
-	*tab[tetris][1] = 0; 
+	(*tab)[tetris][0] = 0; 
+	(*tab)[tetris][1] = 0; 
 	while (buff[i])
 	{
 		if (buff[i] == '#')
 		{
-			*tab[tetris][k] = ((i % 5) - x); 
-			*tab[tetris][k + 1] = ((i / 5) - y);
+			(*tab)[tetris][k] = ((i % 5) - x); 
+			(*tab)[tetris][k + 1] = ((i / 5) - y);
+			//printf("tab[tetris][%d] = %d\ntab[tetris][%d] = %d\n", k - 2, (*tab)[tetris][k], k - 1, (*tab)[tetris][k + 1]);
 			k = k + 2;
 		}
 		i++;
