@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/15 23:55:30 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/17 20:06:35 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/18 16:26:05 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,15 +52,41 @@ char	**create_map(int size)
 	return (map);
 }
 
-void	asign_to_map(char ***map)
+void	asign_to_map(char **map, int **tab, int x, int y)
 {
-	
+	int i;
+	int j;
+	int k;
 
+	i = 0;
+	j = 1;
+	while (j <= 7)
+	{
+		k = 0;
+		map[x + *(*tab + i)][y + *(*tab + j)] = 'A'; //+num
+		while (k < 4)
+			k++;
+		i = i + 2;
+		j = j + 2;
+	}
+	//num++;
+	return (map);
 }
 
-void	delete_from_map(char ***map)
+void	delete_from_map(char **map, int **tab, int x, int y)
 {
+	int i;
+	int j;
 
+	i = 0;
+	j = 1;
+	while (j <= 7)
+	{
+		map[x + *(*tab + i)][y + *(*tab + j)] = '.';
+		i = i + 2;
+		j = j + 2;	
+	}
+	return (map);
 }
 
 int		solve_map(int **tab)
@@ -74,7 +100,140 @@ int		solve_map(int **tab)
 
 }
 
+char	**ft_place_piece(char **map, int **tab, int x, int y)
+{
+	int j;
+	int k;
+//	static int letter;
+	int i;
 
+	j = 0;
+	k = 1;
+//	if (!letter)
+//		letter = 0;
+	while (k <= 7)
+	{
+		map[y + *(*tab + k)][x + *(*tab + j)] = 'A'; //+ letter;
+		i = 0;
+		while (i < 4)
+		{
+			printf("%s\n", map[i]);
+			i++;
+		}
+		printf("\n");
+		k = k + 2;
+		j = j + 2;
+	}
+	//letter++;
+	return (map);
+}
+
+char	**ft_delete_piece(char **map, int **tab, int x, int y)
+{
+	int j;
+	int k;
+
+	j = 0;
+	k = 1;
+	while (k <= 7)
+	{
+		map[y + *(*tab + k)][x + *(*tab + j)] = '.';
+		k = k + 2;
+		j = j + 2;
+	}
+	return (map);
+}
+
+/*int		ft_solve(char **map, int **tab, int size)
+{
+	int			x;
+	int			y;
+	int			j;
+	int			k;
+
+	if (*(*tab) == 1000)
+		return (1);
+	y = 0;
+	while (y < size)//iter colone
+	{
+		x = 0;
+		while (x < size)//iter ligne
+		{
+			k = 1;
+			j = 0;
+			while (k <= 7 && x + *(*tab + j) < size && y + *(*tab + k) < size &&
+			y + *(*tab + k) >= 0 && x + *(*tab + j) >= 0 &&
+			map[y + *(*tab + k)][x + *(*tab + j)] == '.')
+			{
+				if (k == 7)//dispinibilité verifier
+				{
+					map = ft_place_piece(map, tab, x, y);
+					ft_solve(map, tab + 1, size);//on a reussit a placer la piece donc on essaye avec la suivante
+					map = ft_delete_piece(map, tab, x, y);// on suprime et on recommence sur la case d'apres
+				}
+				k = k + 2;
+				j = j + 2;
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}*/
+
+int		ft_check_free(char **map, int **tab, int x, int y)
+{
+	int k;
+	int j;
+	int i;
+	int size;
+
+
+	size = 0;
+	j = 0;
+	k = 1;
+	while (map[0][size])
+		size++;
+	size++;
+	while (k <= 7 && x + *(*tab + j) < size && y + *(*tab + k) < size &&
+	y + *(*tab + k) >= 0 && x + *(*tab + j) >= 0 &&
+	map[y + *(*tab + k)][x + *(*tab + j)] == '.')
+	{
+		if (k == 7)//dispinibilité verifier
+			return(1);
+		k = k + 2;
+		j = j + 2;
+	}
+	return(0);
+}
+
+int		ft_solve(char **map, int **tab, int size)
+{
+	int			x;
+	int			y;
+
+	if (*(*tab) == 1000)
+		return (1);
+	y = 0;
+	while (y < size)//iter colone
+	{
+		x = 0;
+		while (x < size)//iter ligne
+		{
+			if (ft_check_free(map, tab, x, y) == 1)
+			{
+				map = ft_place_piece(map, tab, x, y);
+				ft_solve(map, tab + 1, size);//on a reussit a placer la piece donc on essaye avec la suivante
+				map = ft_delete_piece(map, tab, x, y);// on suprime et on recommence sur la case d'apres
+			}
+			x++;
+		}
+		y++;
+	}
+	return (0);
+}
+
+/*
 char	**ft_place_piece(char **map, int **tab, int num, int x, int y) //tab[x][y]
 {
 	int i;
