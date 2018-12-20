@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 13:44:30 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/17 20:06:37 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/19 19:24:33 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 
 # include "../libft/libft.h"
 
-void		usage(void);
+void	usage(void);
 
 int     check_contact(char *buff);
 int     check_buff(char *buff);
@@ -24,8 +24,9 @@ int     check_grid(int fd, int **tab);
 
 int     **create_tab(int **tab);
 void	free_tab(int ***tab);
-int     relative_coord(int i, int j, char *buff);
+
 void    create_tetris(int tetris, char *buff, int ***tab);
+int		count_tetris(int tetris);
 
 int		fillit(int fd);
 

@@ -6,11 +6,17 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:14:18 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/17 20:06:32 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/19 22:07:47 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fillit.h"
+
+void		usage(void)
+{
+	ft_putstr("usage: fillit map_file\n");
+	ft_putstr("invalid arg number \n");
+}
 
 int		fillit(int fd)
 {
@@ -20,20 +26,13 @@ int		fillit(int fd)
 	tab = NULL;
 	if (!(tab = create_tab(tab)))
 		return (-1);
-	if (!(tetris = (check_grid(fd, tab) >= 0)))
+	if (!((tetris = check_grid(fd, tab)) >= 0))
 	{
-		free_tab(tab);
+		//free_tab(&tab);
 		return (-1);
 	}
-
-	printf("valid\n");
+	tab[tetris + 1][0] = 1000;
 	return (0);
-}
-
-void		usage(void)
-{
-	ft_putstr("usage: fillit map_file\n");
-	ft_putstr("invalid arg number \n");
 }
 
 int			main(int ac, char **av)
@@ -55,9 +54,43 @@ int			main(int ac, char **av)
 	return (0);
 }
 
-
 /*
 
+int			count_tetris(int fd)
+{
+	int 	ret;
+	int		tetris;
+	char	*buff;
+
+	ret = 0;
+	tetris = 0;
+	buff = ft_strnew(21);
+	while ((ret = read(fd, buff, 21)) > 0)
+	{
+		printf("coucou\n");
+		tetris++;
+	}
+	return (tetris);
+}
+
+int			count_tetris(int fd, int **tab)
+{
+	static int	number;
+
+	printf("coucou\n");
+
+	if (!number)
+	{
+		number = check_grid(fd, tab);
+		printf("number is %d\n", number);
+	}	
+	else
+	{
+		printf("number is %d\n", number);
+		return (number);
+	}
+	return (-1);
+}
 
 #include "libft/libft.h"
 
@@ -133,7 +166,7 @@ char	**ft_delete_piece(char **map, int **tab, int x, int y)
 	return (map);
 }
 
-/*int		ft_solve(char **map, int **tab, int size)
+int		ft_solve(char **map, int **tab, int size)
 {
 	int			x;
 	int			y;
