@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   store_tetris.c                                     :+:      :+:    :+:   */
+/*   store.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/13 23:55:19 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/20 19:37:24 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/25 02:40:35 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,23 +43,23 @@ void		free_tab(int ***tab)
 	*tab = NULL;
 }
 
-void		ft_free_doubletab(char **tabc, int z)
+void		free_tab_len(char **tab, int len)
 {
 	int i;
 
 	i = 0;
-	while (i < z)
+	while (i < len)
 	{
-		if (tabc[i])
-			free(tabc[i]);
-		tabc[i] = NULL;
+		if (tab[i])
+			free(tab[i]);
+		tab[i] = NULL;
 		i++;
 	}
-	free(tabc);
-	tabc = NULL;
+	free(tab);
+	tab = NULL;
 }
 
-void		create_tetris(int tetris, char *buff, int ***tab)
+void		add_tetris_to_tab(int tetris, char *buff, int ***tab)
 {
 	int i;
 	int x;

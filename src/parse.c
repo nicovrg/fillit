@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_map.c                                        :+:      :+:    :+:   */
+/*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/11/24 13:42:49 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/20 21:33:23 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/25 02:40:33 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ int		check_grid(int fd, int **tab)
 		else if (check_contact(buff) == -1)
 			return (-1);
 		else
-			create_tetris(tetris, buff, &tab);
+			add_tetris_to_tab(tetris, buff, &tab);
 		tetris++;
 	}
 	if (tetris > 26)

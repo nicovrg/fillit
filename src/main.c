@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:14:18 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/20 18:28:21 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/25 02:41:35 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int		fillit(int fd, int **tab, char **map)
 	i = -1;
 	while (++i < size)
 		ft_putendl(map[i]);
-	ft_free_doubletab(map, size);
+	free_tab_len(map, size);
 	free_tab(&tab);
 	tab = NULL;
 	return (0);
