@@ -6,15 +6,15 @@
 #    By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 16:29:08 by nivergne          #+#    #+#              #
-#    Updated: 2018/12/25 02:29:38 by nivergne         ###   ########.fr        #
+#    Updated: 2018/12/25 02:34:38 by nivergne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = fillit
 
-SRCS =	./src/check_map.c \
-		./src/store_tetris.c \
-		./src/fillit_test.c \
+SRCS =	./src/parse.c \
+		./src/store.c \
+		./src/solve.c \
 		./src/main.c
 
 OBJECTS = $(SRCS:.c=.o)
