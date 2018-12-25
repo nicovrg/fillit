@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 15:14:18 by nivergne          #+#    #+#             */
-/*   Updated: 2018/12/25 02:41:35 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/25 17:58:11 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ int		fillit(int fd, int **tab, char **map)
 	}
 	tab[tetris][0] = 1000;
 	size = ft_sqrt(tetris * 4);
-	map = ft_map(size, map);
-	while (ft_solve(&map, tab, size) != 1)
-		map = ft_map(++size, map);
+	map = create_map(size, map);
+	while (solve(&map, tab, size) != 1)
+		map = create_map(++size, map);
 	i = -1;
 	while (++i < size)
 		ft_putendl(map[i]);

@@ -6,7 +6,7 @@
 #    By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/11/09 16:29:08 by nivergne          #+#    #+#              #
-#    Updated: 2018/12/25 02:34:38 by nivergne         ###   ########.fr        #
+#    Updated: 2018/12/25 17:54:02 by nivergne         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,8 @@ IGREY = \x1b[40m
 UNDER = \x1b[4m
 REV = \x1b[7m
 BOLD = \x1b[1m
+END = \x1b[0m
+
 WHITE = \x1b[37m
 
 all: $(NAME)
@@ -54,16 +56,16 @@ $(NAME): $(PRINT) $(OBJECTS) include/fillit.h
 	@echo "$(GRN)$(BOLD)[fillit created]$(WHITE)"
 
 clean:
-	@echo "$(CYAN)$(IGREY)$(RED)[DELETE$(CYAN) object's files ...$(RED)]"
+	@echo "$(CYAN)$(IGREY)$(RED)[$(BOLD)$(BLU)DELETE ->$(CYAN) object's files ...$(END)$(RED)]"
 	@$(MAKE) clean -C libft
 	@rm -f $(OBJECTS)
 	@echo "$(GRN)$(BOLD)[objects deleted]"
 	@echo ""
 
 fclean: 
-	@echo "$(CYAN)$(IGREY)$(RED)[DELETE -> $(CYAN)$(NAME) ...$(RED)]"
+	@echo "$(CYAN)$(IGREY)$(RED)[$(BOLD)$(BLU)DELETE -> $(CYAN)$(NAME) ...$(END)$(RED)]"
 	@rm -f $(NAME)
-	@echo "$(CYAN)$(IGREY)$(RED)[DELETE -> $(CYAN)object's files ...$(RED)]"
+	@echo "$(CYAN)$(IGREY)$(RED)[$(BOLD)$(BLU)DELETE ->$(CYAN) object's files ...$(END)$(RED)]"
 	@rm -f $(OBJECTS)
 	@$(MAKE) fclean -C libft
 	@echo "$(GRN)$(BOLD)[objects and executable deleted]"

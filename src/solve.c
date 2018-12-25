@@ -6,13 +6,13 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 16:12:24 by jdonati           #+#    #+#             */
-/*   Updated: 2018/12/25 02:40:37 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/25 18:00:08 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/fillit.h"
 
-char	**ft_map(int size, char **map)
+char	**create_map(int size, char **map)
 {
 	int x;
 	int y;
@@ -41,7 +41,7 @@ char	**ft_map(int size, char **map)
 	return (map);
 }
 
-int		ft_place_piece(char ***map, int **tab, int x, int y)
+int		place_piece(char ***map, int **tab, int x, int y)
 {
 	int j;
 	int k;
@@ -57,7 +57,7 @@ int		ft_place_piece(char ***map, int **tab, int x, int y)
 	return (0);
 }
 
-int		ft_delete_piece(char ***map, int **tab, int x, int y)
+int		delete_piece(char ***map, int **tab, int x, int y)
 {
 	int j;
 	int k;
@@ -73,7 +73,7 @@ int		ft_delete_piece(char ***map, int **tab, int x, int y)
 	return (0);
 }
 
-int		ft_check_free(char ***map, int **tab, int x, int y)
+int		check_free(char ***map, int **tab, int x, int y)
 {
 	int		k;
 	int		j;
@@ -96,7 +96,7 @@ int		ft_check_free(char ***map, int **tab, int x, int y)
 	return (0);
 }
 
-int		ft_solve(char ***map, int **tab, int size)
+int		solve(char ***map, int **tab, int size)
 {
 	int			x;
 	int			y;
@@ -111,13 +111,13 @@ int		ft_solve(char ***map, int **tab, int size)
 		x = -1;
 		while (++x < size)
 		{
-			if (ft_check_free(map, tab, x, y) == 1)
+			if (check_free(map, tab, x, y) == 1)
 			{
-				ft_place_piece(map, tab, x, y);
-				ft_solve(map, tab + 1, size);
+				place_piece(map, tab, x, y);
+				solve(map, tab + 1, size);
 				if (i > 0)
 					return (1);
-				ft_delete_piece(map, tab, x, y);
+				delete_piece(map, tab, x, y);
 			}
 		}
 	}
