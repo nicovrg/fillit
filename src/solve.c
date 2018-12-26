@@ -6,7 +6,7 @@
 /*   By: nivergne <nivergne@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/12/11 16:12:24 by jdonati           #+#    #+#             */
-/*   Updated: 2018/12/25 18:00:08 by nivergne         ###   ########.fr       */
+/*   Updated: 2018/12/26 01:49:41 by nivergne         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,26 +17,26 @@ char	**create_map(int size, char **map)
 	int x;
 	int y;
 
-	y = 0;
+	x = 0;
 	if (map != NULL)
 		free_tab_len(map, size - 1);
 	if (!(map = (char **)malloc(sizeof(char *) * size + 1)))
 		return (NULL);
-	while (y < size)
+	while (x < size)
 	{
-		x = 0;
-		if (!(map[y] = (char *)malloc(sizeof(char) * size + 1)))
+		y = 0;
+		if (!(map[x] = (char *)malloc(sizeof(char) * size + 1)))
 		{
-			free_tab_len(map, y);
+			free_tab_len(map, x);
 			return (NULL);
 		}
-		while (x < size)
+		while (y < size)
 		{
-			map[y][x] = '.';
-			x++;
+			map[x][y] = '.';
+			y++;
 		}
-		map[y][x] = '\0';
-		y++;
+		map[x][y] = '\0';
+		x++;
 	}
 	return (map);
 }
